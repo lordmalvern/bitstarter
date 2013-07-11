@@ -13,7 +13,7 @@ var sys = require('util');
 var rest = require('restler');
 var HTMLFILE_DEFAULT = "index.html";
 var CHECKSFILE_DEFAULT = "checks.json";
-var URL_DEFAULT = "https://floating-harbor-9271.herokuapp.com/"
+
 
 var assertFileExists = function(infile) {
     var instr = infile.toString();
@@ -30,7 +30,7 @@ var cheerioHtmlFile = function(htmlfile) {
 
 var loadChecks = function(checksfile) {
     return JSON.parse(fs.readFileSync(checksfile));
-}
+};
 
 var checkHtmlFile = function(htmlfile, checksfile) {
     $ = cheerioHtmlFile(htmlfile);
@@ -51,11 +51,32 @@ if(require.main == module){
     program
     .option('-c, --checks <check_file>', 'Path to checks.json', clone(assertFileExists), CHECKSFILE_DEFAULT)
     .option('-f, --file <html_file>', 'Path to index.html', clone(assertFileExists), HTMLFILE_DEFAULT)
-    .option('-u, --url <url>', 'URL of HTML file', clone(assertFileExists), URL_DEFAULT)  
+    .option('-u, --url <url>', 'URL of HTML file')  
     .parse(process.argv);
+    if(program.url){
+	rest.get(program.url).on('complete', function(result){
+	    if (result instanceof Error) {
+		console.log("Error " + result.message);
+		this.retry(5000);
+		}
+	    else
+	    {
+		var outfile = "tester.html";
+		fs.writeFile(outfile, result, function(err){
+		    if(err)
+			throw err;
+		    var check = checkHtmlFile(outfile, program.checks);
+                    var out = JSON.stringify(check, null, 4);
+                    console.log(out);
+		});
+	    }
+	})
+    }
+    else{
     var checkJson = checkHtmlFile(program.file, program.checks);
     var outJson = JSON.stringify(checkJson, null, 4);
     console.log(outJson);
+    }
 } else {
     exports.checkHtmlFile = checkHtmlFile;
 }
