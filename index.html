@@ -3,11 +3,23 @@
   <head>
     <meta charset="utf-8">
     <title>My First Bitstarter</title>
-    <link type="text/css" rel="stylesheet"
-	  href="/home/ubuntu/bootstrap/css/bootstrap.css">
+    <link rel="stylesheet"
+	  href="http://d396qusza40orc.cloudfront.net/startup%2Fcode%2Fbootstrap-combined.no-icons.min.css">
+    <link rel="stylesheet"
+	  href="http://netdna.bootstrapcdn.com/font-awesome/3.0.2/css/font-awesome.css">
+    <link rel="stylesheet"
+	  href="https://d396qusza40orc.cloudfront.net/startup%2Fcode%2Fsocial-buttons.css">
     <script src="http://code.jquery.com/jquery.js"></script>
     <script src="/home/ubuntu/bootstrap/js/bootstrap.js"></script>
+    <link href ="http://fonts.googleapis.com/css?family=Ubuntu:300,400,500,700,300italic,400italic,500italic,700italic" rel="stylesheet" type="text/css">
+    <link href ="http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,300,400,600,700,800" rel="stylesheet" type="text/css">
     <style type="text/css">
+      /* Large desktop */
+      @media (min-width: 980px){
+      body {
+      padding-top: 60px;
+      } 
+      }
       body {
       padding-top: 20px;
       padding-bottom: 40px;
@@ -39,23 +51,29 @@
       </style>
     </head>
   <body>
-    <div class="container">
-      <div class="row navigation">
-	<div class="span2 logo">
-	  Logo
-	  </div>
-	<div class="span6 blank">
-	  Blank
-	  </div>
-	<div class="span4 about">
-	  About
+
+    <!-- Mobile-friendly navbar adapted from example. -->
+    <div class ="navbar navbar-inverse navbar-fixed-top">
+      <div class ="navbar-inner">
+	<div class="container">
+	  <button type="button" class="btn btn-navbar"
+		  data-toggle="collapse" data-target=".nav-collapse">
+	    <span class="icon-bar"></span>
+	    <span class="icon-bar"></span>
+	    <span class="icon-bar"></span>
+	  </button>
+	  <a class="brand" href="#">Bitstarter</a>
+	  <div class="nav-collapse collapse">
+	    <ul class="nav">
+	      <li class="active"><a href="#">Home</a></li>
+	      <li><a href ="#about">About</a></li>
+	      <li><a href ="#contact">Contact</a></li>
+	    </ul>
 	  </div>
 	</div>
-      <div class="row heading">
-	<div class="span12">
-	  <h1>Bitstarter Title</h1>
-	  </div>
-	</div>
+      </div>
+    </div>
+
       <div class="row pitch">
 	<div class="span6 video">
 	  Video
